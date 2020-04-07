@@ -19,4 +19,7 @@ module.exports = {
     ],
   },
   plugins: [new HtmlWebPackPlugin({template: 'src/index.html'})],
+  resolve: {
+    modules: ['src', 'node_modules'],
+  },
 };
