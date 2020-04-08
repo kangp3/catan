@@ -1,0 +1,19 @@
+.play {
+  display: inline-flex;
+  height: 100%;
+  width: 100%;
+
+  .gamePane {
+    flex-grow: 3;
+
+    height: 100%;
+    background-color: red;
+  }
+
+  .chatPane {
+    flex-grow: 1;
+
+    height: 100%;
+    background-color: green;
+  }
+}

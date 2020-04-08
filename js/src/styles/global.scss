@@ -1,0 +1,17 @@
+html,
+body {
+  margin: 0;
+  // html and body tags don't start with defined dimensions, so we have to
+  // manually set them to 100%
+  height: 100%;
+  width: 100%;
+}
+
+// Since modules are enabled in the css-loader, the #root selector must be
+// manually annotated as a global style
+:global {
+  #root {
+    height: 100%;
+    width: 100%;
+  }
+}
