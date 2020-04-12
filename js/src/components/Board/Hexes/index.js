@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {HEX_WIDTH, HEX_HEIGHT} from 'components/Board/dims';
-import Hex from 'components/Hex';
+import Hex from './Hex';
 
 class Hexes extends React.Component {
   getNextPos = (currPos, sideIdx) => {
