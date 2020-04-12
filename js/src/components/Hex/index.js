@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import styles from './styles.scss';
+import {HEX_WIDTH, HEX_HEIGHT} from 'components/Board/dims.js';
 
-export const HEX_WIDTH = 70;
-export const HEX_HEIGHT = 80;
+import styles from './styles.scss';
 
 class Hex extends React.Component {
   getPoints = () => {

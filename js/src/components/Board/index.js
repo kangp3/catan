@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {HEX_WIDTH, HEX_HEIGHT} from 'components/Hex';
+import {HEX_WIDTH, HEX_HEIGHT} from 'components/Board/dims';
 
 import Hexes from './Hexes';
 
@@ -16,7 +16,7 @@ class Board extends React.Component {
   render() {
     const {size} = this.props;
     return (
-      <svg vector-effect="non-scaling-stroke" viewBox={this.getViewBox()}>
+      <svg vectorEffect="non-scaling-stroke" viewBox={this.getViewBox()}>
         <Hexes size={size} />
       </svg>
     );
