@@ -1,0 +1,9 @@
+.hex {
+  cursor: pointer;
+  fill: transparent;
+  stroke-width: 1;
+  stroke: #000;
+}
+.hex:hover {
+  stroke-width: 2;
+}
