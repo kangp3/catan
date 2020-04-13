@@ -4,13 +4,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.ts(x?)$/,
         exclude: /node_modules/,
-        use: {
-          // Translates from ES6 syntax to a more widely-supported lower JS
-          // version
-          loader: 'babel-loader',
-        },
+        use: [
+          {
+            loader: 'ts-loader',
+          },
+        ],
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader',
       },
       {
         test: /\.html$/,
@@ -62,5 +67,6 @@ module.exports = {
     //   import 'containers/App'
     // syntax as opposed to relative path syntax
     modules: ['src', 'node_modules'],
+    extensions: ['.ts', '.tsx', '.js'],
   },
 };
