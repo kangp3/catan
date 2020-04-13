@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {HEX_WIDTH, HEX_HEIGHT} from 'components/Board/dims';
 
 import Hexes from './Hexes';
+import Vertices from './Vertices';
 
 class Board extends React.Component {
   getViewBox = () => {
@@ -18,6 +19,7 @@ class Board extends React.Component {
     return (
       <svg vectorEffect="non-scaling-stroke" viewBox={this.getViewBox()}>
         <Hexes size={size} />
+        <Vertices size={size} />
       </svg>
     );
   }

@@ -1,0 +1,14 @@
+.vertex {
+  fill: blue;
+  animation: softbeat 1.2s linear infinite;
+}
+
+@keyframes softbeat {
+  0%,
+  100% {
+    opacity: 100%;
+  }
+  85% {
+    opacity: 60%;
+  }
+}

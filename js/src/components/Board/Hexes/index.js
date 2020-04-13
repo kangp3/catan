@@ -56,7 +56,7 @@ class Hexes extends React.Component {
         y: 0,
       };
       let sideIdx = 0;
-      for (let hexIdx = 0; hexIdx < ringSize * 6; hexIdx++) {
+      for (let hexIdx = 0; hexIdx < 6 * ringSize; hexIdx++) {
         hexes.push(<Hex key={key} x={currPos.x} y={currPos.y} />);
         currPos = this.getNextPos(currPos, sideIdx);
         key++;
