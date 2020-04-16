@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 
 import Game from 'containers/Game';
 import Chat from 'containers/Chat';
 
 import styles from './styles.scss';
 
-class Play extends React.Component {
+class Play extends React.Component<{}, {}> {
   render() {
     return (
       <div className={styles.play}>

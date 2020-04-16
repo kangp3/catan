@@ -1,8 +1,10 @@
 import * as React from 'react';
 
+import Play from 'containers/Play';
+
 class App extends React.Component<{}, {}> {
   render() {
-    return <h1>hi</h1>;
+    return <Play />;
   }
 }
 
