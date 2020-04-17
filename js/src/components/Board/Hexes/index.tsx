@@ -1,11 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import {HEX_WIDTH, HEX_HEIGHT} from 'components/Board/dims';
+import Position from 'types/Position';
+
 import Hex from './Hex';
 
-class Hexes extends React.Component {
-  getNextPos = (currPos, sideIdx) => {
+interface Props {
+  size: number;
+}
+
+class Hexes extends React.Component<Props> {
+  getNextPos = (currPos: Position, sideIdx: number): Position => {
     const nextPos = currPos;
     switch (sideIdx) {
       case 0:
@@ -69,13 +74,5 @@ class Hexes extends React.Component {
     return <g>{hexes}</g>;
   }
 }
-
-Hexes.propTypes = {
-  size: PropTypes.number,
-};
-
-Hexes.defaultProps = {
-  size: 3,
-};
 
 export default Hexes;

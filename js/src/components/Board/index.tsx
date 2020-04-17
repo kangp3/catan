@@ -1,12 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import {HEX_WIDTH, HEX_HEIGHT} from 'components/Board/dims';
 
 import Hexes from './Hexes';
 import Vertices from './Vertices';
 
-class Board extends React.Component {
+interface Props {
+  size: number;
+}
+
+class Board extends React.Component<Props> {
   getViewBox = () => {
     const {size} = this.props;
     const width = (2 * size - 1) * HEX_WIDTH;
@@ -24,13 +27,5 @@ class Board extends React.Component {
     );
   }
 }
-
-Board.propTypes = {
-  size: PropTypes.number,
-};
-
-Board.defaultProps = {
-  size: 3,
-};
 
 export default Board;

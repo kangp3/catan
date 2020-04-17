@@ -1,12 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import {HEX_WIDTH, HEX_HEIGHT} from 'components/Board/dims';
+import Position from 'types/Position';
 
 import Vertex from './Vertex';
 
-class Vertices extends React.Component {
-  getSideVerticesPos = (sideIdx, ringSize, firstPos, firstKey) => {
+interface Props {
+  size: number;
+}
+
+class Vertices extends React.Component<Props> {
+  getSideVerticesPos = (
+    sideIdx: number,
+    ringSize: number,
+    firstPos: Position,
+    firstKey: number,
+  ): Position[] => {
     const currPos = {...firstPos};
     const posList = [{...currPos}];
     switch (sideIdx) {
@@ -105,7 +114,6 @@ class Vertices extends React.Component {
           currPos,
           key,
         );
-        console.log(posList);
         vertices.push(
           ...posList
             .slice(0, -1)
@@ -118,13 +126,5 @@ class Vertices extends React.Component {
     return <g>{vertices}</g>;
   }
 }
-
-Vertices.propTypes = {
-  size: PropTypes.number,
-};
-
-Vertices.defaultProps = {
-  size: 3,
-};
 
 export default Vertices;
