@@ -4,7 +4,7 @@
   "description": "Browser Catan",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start": "webpack-dev-server --mode development --info-verbosity verbose",
     "build": "webpack --mode production"
   },
   "author": "",

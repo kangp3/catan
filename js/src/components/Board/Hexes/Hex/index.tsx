@@ -1,13 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import * as React from 'react';
 
 import {HEX_WIDTH, HEX_HEIGHT} from 'components/Board/dims.js';
 
-import styles from './styles.scss';
+import * as styles from './styles.scss';
 
-class Hex extends React.Component {
-  getPoints = () => {
+interface Props {
+  x: number;
+  y: number;
+}
+
+class Hex extends React.Component<Props> {
+  getPoints = (): string => {
     const xStep = HEX_WIDTH / 2;
     const yStep = HEX_HEIGHT / 4;
     return [
@@ -20,12 +23,12 @@ class Hex extends React.Component {
     ].join(' ');
   };
 
-  getTransform = () => {
+  getTransform = (): string => {
     const {x, y} = this.props;
     return `translate(${x + 1},${y + 1})`;
   };
 
-  onClick = e => {
+  onClick = (e: React.MouseEvent) => {
     e.preventDefault();
     console.log('hi');
   };
@@ -33,7 +36,7 @@ class Hex extends React.Component {
   render() {
     return (
       <polygon
-        className={classNames(styles.hex, this.props.className)}
+        className={styles.hex}
         points={this.getPoints()}
         transform={this.getTransform()}
         onClick={this.onClick}
@@ -41,15 +44,5 @@ class Hex extends React.Component {
     );
   }
 }
-
-Hex.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  className: PropTypes.string,
-};
-
-Hex.defaultProps = {
-  className: '',
-};
 
 export default Hex;
