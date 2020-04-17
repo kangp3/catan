@@ -1,5 +1,5 @@
-// Allows TypeScript to import files produced by the style-loader
-declare module '*.scss' {
-  export const content: {[className: string]: string};
-  export default content;
-}
+// Allows TypeScript to import JS modules produced by the css-loader
+//
+// Since the style-loader then moves these styles inline, there's no need to
+// define types beyond allowing TypeScript to resolve *.scss files
+declare module '*.scss';

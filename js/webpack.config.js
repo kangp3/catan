@@ -13,11 +13,6 @@ module.exports = {
         ],
       },
       {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'source-map-loader',
-      },
-      {
         test: /\.html$/,
         use: {
           loader: 'html-loader',
@@ -69,4 +64,7 @@ module.exports = {
     modules: ['src', 'node_modules'],
     extensions: ['.ts', '.tsx', '.js'],
   },
+  // Generate source maps for Chrome debugger to map generated JS back to original
+  // TypeScript code
+  devtool: 'source-map',
 };
