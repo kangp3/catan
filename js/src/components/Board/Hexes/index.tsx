@@ -1,76 +1,34 @@
-import * as React from 'react';
+import * as React from "react";
 
-import {HEX_WIDTH, HEX_HEIGHT} from 'components/Board/dims';
-import Position from 'types/Position';
+import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
+import { AxialCoord } from "types/Coord";
 
-import Hex from './Hex';
+import Hex from "./Hex";
 
 interface Props {
   size: number;
 }
 
 class Hexes extends React.Component<Props> {
-  getNextPos = (currPos: Position, sideIdx: number): Position => {
-    const nextPos = currPos;
-    switch (sideIdx) {
-      case 0:
-        // Diagonal up and right
-        nextPos.x += HEX_WIDTH / 2;
-        nextPos.y -= (HEX_HEIGHT * 3) / 4;
-        break;
-      case 1:
-        // Right
-        nextPos.x += HEX_WIDTH;
-        break;
-      case 2:
-        // Diagonal down and right
-        nextPos.x += HEX_WIDTH / 2;
-        nextPos.y += (HEX_HEIGHT * 3) / 4;
-        break;
-      case 3:
-        // Diagonal down and left
-        nextPos.x -= HEX_WIDTH / 2;
-        nextPos.y += (HEX_HEIGHT * 3) / 4;
-        break;
-      case 4:
-        // Left
-        nextPos.x -= HEX_WIDTH;
-        break;
-      case 5:
-        // Diagonal up and left
-        nextPos.x -= HEX_WIDTH / 2;
-        nextPos.y -= (HEX_HEIGHT * 3) / 4;
-        break;
+  getCoords = (): AxialCoord[] => {
+    const { size } = this.props;
+    const radius = size - 1;
+
+    const coords = [];
+    for (let x = -radius; x < size; x++) {
+      const maxY = Math.min(radius, radius - x);
+      const minY = Math.max(-radius, -radius - x);
+      for (let y = minY; y <= maxY; y++) {
+        coords.push({ x: x, y: y });
+      }
     }
-    return nextPos;
+    return coords;
   };
 
   render() {
-    const {size} = this.props;
-
-    const hexes = [];
-    let key = 0;
-    for (let ringSize = 0; ringSize < size; ringSize++) {
-      if (ringSize === 0) {
-        hexes.push(<Hex key={key} x={0} y={0} />);
-        key++;
-        continue;
-      }
-      let currPos = {
-        x: -ringSize * HEX_WIDTH,
-        y: 0,
-      };
-      let sideIdx = 0;
-      for (let hexIdx = 0; hexIdx < 6 * ringSize; hexIdx++) {
-        hexes.push(<Hex key={key} x={currPos.x} y={currPos.y} />);
-        currPos = this.getNextPos(currPos, sideIdx);
-        key++;
-        if ((hexIdx + 1) % ringSize === 0) {
-          sideIdx++;
-        }
-      }
-    }
-
+    const hexes = this.getCoords().map((coord, key) => (
+      <Hex key={key} coord={coord} />
+    ));
     return <g>{hexes}</g>;
   }
 }

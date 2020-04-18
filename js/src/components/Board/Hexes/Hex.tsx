@@ -1,31 +1,31 @@
 import * as React from "react";
 
-import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
+import { HEX_XSTEP, HEX_YSTEP } from "components/Board/dims";
+import { AxialCoord } from "types/Coord";
 
 import * as styles from "./styles.scss";
 
 interface Props {
-  x: number;
-  y: number;
+  coord: AxialCoord;
 }
 
 class Hex extends React.Component<Props> {
   getPoints = (): string => {
-    const xStep = HEX_WIDTH / 2;
-    const yStep = HEX_HEIGHT / 4;
     return [
-      `${-xStep},${-yStep}`,
-      `0,${-2 * yStep}`,
-      `${xStep},${-yStep}`,
-      `${xStep},${yStep}`,
-      `0,${2 * yStep}`,
-      `${-xStep},${yStep}`,
+      `${-HEX_XSTEP},${-HEX_YSTEP}`,
+      `0,${-2 * HEX_YSTEP}`,
+      `${HEX_XSTEP},${-HEX_YSTEP}`,
+      `${HEX_XSTEP},${HEX_YSTEP}`,
+      `0,${2 * HEX_YSTEP}`,
+      `${-HEX_XSTEP},${HEX_YSTEP}`,
     ].join(" ");
   };
 
   getTransform = (): string => {
-    const { x, y } = this.props;
-    return `translate(${x + 1},${y + 1})`;
+    const { coord } = this.props;
+    const xPos = (-2 * coord.x - coord.y) * HEX_XSTEP;
+    const yPos = -3 * coord.y * HEX_YSTEP;
+    return `translate(${xPos + 1},${yPos + 1})`;
   };
 
   onClick = (e: React.MouseEvent) => {
