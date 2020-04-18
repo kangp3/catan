@@ -1,16 +1,19 @@
 import * as React from "react";
 
-import { HEX_WIDTH, HEX_HEIGHT, Direction } from "components/Board/dims";
+import { AxialCoord } from "types/Coord";
 
 import Edge from "./Edge";
 
 interface Props {
-  size: number;
+  edges: [AxialCoord, AxialCoord][];
 }
 
 class Edges extends React.Component<Props> {
   render() {
-    return <Edge x={0} y={0} angle={Direction.Up} />;
+    const edges = this.props.edges.map((edge, key) => (
+      <Edge p1Coord={edge[0]} p2Coord={edge[1]} />
+    ));
+    return <g>{edges}</g>;
   }
 }
 

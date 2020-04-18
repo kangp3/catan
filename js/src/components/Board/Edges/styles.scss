@@ -1,7 +1,28 @@
-.edge {
-  stroke-width: 8;
-  stroke: red;
+.beater {
+  cursor: pointer;
+  stroke-width: 0.5;
+  stroke: black;
+  fill: red;
+  animation: softbeat 1.2s linear infinite;
 }
-.edge:hover {
-  stroke-width: 10;
+.hover {
+  cursor: pointer;
+  stroke: black;
+  stroke-width: 1;
+  fill: red;
+  opacity: 0%;
+}
+.hover:hover {
+  stroke: black;
+  opacity: 100%;
+}
+
+@keyframes softbeat {
+  0%,
+  100% {
+    opacity: 100%;
+  }
+  85% {
+    opacity: 60%;
+  }
 }

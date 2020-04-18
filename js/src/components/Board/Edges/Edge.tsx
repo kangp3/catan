@@ -1,58 +1,101 @@
 import * as React from "react";
 
-import { HEX_WIDTH, HEX_HEIGHT, Direction } from "components/Board/dims";
-import Position from "types/Position";
+import { HEX_XSTEP, HEX_YSTEP, EDGE_WIDTH } from "components/Board/dims";
+import { AxialCoord } from "types/Coord";
 
 import * as styles from "./styles.scss";
 
+const LENGTH_SCALE_FACTOR = 0.6;
+
 interface Props {
+  p1Coord: AxialCoord;
+  p2Coord: AxialCoord;
+}
+
+interface Dims {
   x: number;
   y: number;
-  angle: Direction;
+  width: number;
+  height: number;
 }
 
 class Edge extends React.Component<Props> {
-  getEndpoints = (): [Position, Position] => {
-    const { x, y, angle } = this.props;
+  getVertexXY = (coord: AxialCoord): [number, number] => {
+    const x = (-coord.x - coord.y) * HEX_XSTEP;
+    const y = (coord.x - coord.y) * HEX_YSTEP;
+    return [x + 1, y + 1];
+  };
 
-    let pt1: Position = { x: x + 1, y: y + 1 };
-    let pt2: Position = { x: x + 1, y: y + 1 };
-    switch (angle) {
-      case Direction.Up:
-      case Direction.Down:
-        pt1.y += HEX_HEIGHT / 6;
-        pt2.y -= HEX_HEIGHT / 6;
-        break;
-      case Direction.UpRight:
-      case Direction.DownLeft:
-        pt1.x -= HEX_WIDTH / 6;
-        pt1.y += HEX_HEIGHT / 12;
-        pt2.x += HEX_WIDTH / 6;
-        pt2.y -= HEX_HEIGHT / 12;
-        break;
-      case Direction.UpLeft:
-      case Direction.DownRight:
-        pt1.x -= HEX_WIDTH / 6;
-        pt1.y -= HEX_HEIGHT / 12;
-        pt2.x += HEX_WIDTH / 6;
-        pt2.y += HEX_HEIGHT / 12;
-        break;
-      default:
-        break;
-    }
-    return [pt1, pt2];
+  getDims = (): Dims => {
+    const { p1Coord, p2Coord } = this.props;
+    const [end1X, end1Y] = this.getVertexXY(p1Coord);
+    const [end2X, end2Y] = this.getVertexXY(p2Coord);
+
+    const xLen = Math.abs(end1X - end2X);
+    const yLen = Math.abs(end1Y - end2Y);
+
+    const fullWidth = Math.sqrt(Math.pow(xLen, 2) + Math.pow(yLen, 2));
+    const width = fullWidth * LENGTH_SCALE_FACTOR;
+    const height = EDGE_WIDTH;
+
+    const x = -width / 2;
+    const y = -EDGE_WIDTH / 2;
+    return { x: x, y: y, width: width, height: height };
+  };
+
+  getRotate = (): string => {
+    const { p1Coord, p2Coord } = this.props;
+    const [end1X, end1Y] = this.getVertexXY(p1Coord);
+    const [end2X, end2Y] = this.getVertexXY(p2Coord);
+
+    const xDist = end1X - end2X;
+    const yDist = end1Y - end2Y;
+
+    const rotateRad = Math.atan(yDist / xDist);
+    const rotateDeg = (rotateRad * 180) / Math.PI;
+
+    return `rotate(${rotateDeg})`;
+  };
+
+  getTranslate = (): string => {
+    const { p1Coord, p2Coord } = this.props;
+    const [end1X, end1Y] = this.getVertexXY(p1Coord);
+    const [end2X, end2Y] = this.getVertexXY(p2Coord);
+
+    const x = (end1X + end2X) / 2;
+    const y = (end1Y + end2Y) / 2;
+
+    return `translate(${x},${y})`;
+  };
+
+  getTransform = (): string => {
+    const rotate = this.getRotate();
+    const translate = this.getTranslate();
+    return `${translate} ${rotate}`;
   };
 
   render() {
-    const [pt1, pt2] = this.getEndpoints();
+    const { p1Coord, p2Coord } = this.props;
+    const { x, y, width, height } = this.getDims();
     return (
-      <line
-        className={styles.edge}
-        x1={pt1.x}
-        y1={pt1.y}
-        x2={pt2.x}
-        y2={pt2.y}
-      />
+      <React.Fragment>
+        <rect
+          className={styles.beater}
+          x={x}
+          y={y}
+          width={width}
+          height={height}
+          transform={this.getTransform()}
+        />
+        <rect
+          className={styles.hover}
+          x={x}
+          y={y}
+          width={width}
+          height={height}
+          transform={this.getTransform()}
+        />
+      </React.Fragment>
     );
   }
 }

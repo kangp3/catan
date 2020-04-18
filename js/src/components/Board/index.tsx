@@ -23,8 +23,14 @@ class Board extends React.Component<Props> {
     return (
       <svg vectorEffect="non-scaling-stroke" viewBox={this.getViewBox()}>
         <Hexes size={size} />
-        <Vertices size={size} />
-        <Edges size={size} />
+        <Vertices coords={[{ x: 0, y: 1 }]} />
+        <Edges
+          edges={[
+            [{ x: 0, y: 1 }, { x: -1, y: 1 }],
+            [{ x: 0, y: 1 }, { x: 1, y: 0 }],
+            [{ x: 0, y: 1 }, { x: 0, y: 2 }],
+          ]}
+        />
       </svg>
     );
   }
