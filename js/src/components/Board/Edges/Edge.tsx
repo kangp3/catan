@@ -1,15 +1,9 @@
 import * as React from "react";
 
-import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
+import { HEX_WIDTH, HEX_HEIGHT, Direction } from "components/Board/dims";
 import Position from "types/Position";
 
 import * as styles from "./styles.scss";
-
-export enum Direction {
-  Up,
-  UpRight,
-  UpLeft,
-}
 
 interface Props {
   x: number;
@@ -21,37 +15,30 @@ class Edge extends React.Component<Props> {
   getEndpoints = (): [Position, Position] => {
     const { x, y, angle } = this.props;
 
-    let pt1: Position;
-    let pt2: Position;
+    let pt1: Position = { x: x + 1, y: y + 1 };
+    let pt2: Position = { x: x + 1, y: y + 1 };
     switch (angle) {
       case Direction.Up:
-        pt1 = {
-          x: x + 1,
-          y: y + HEX_HEIGHT / 6 + 1,
-        };
-        pt2 = {
-          x: x + 1,
-          y: y - HEX_HEIGHT / 6 + 1,
-        };
+      case Direction.Down:
+        pt1.y += HEX_HEIGHT / 6;
+        pt2.y -= HEX_HEIGHT / 6;
         break;
       case Direction.UpRight:
-        pt1 = {
-          x: x - HEX_WIDTH / 6 + 1,
-          y: y + HEX_HEIGHT / 12 + 1,
-        };
-        pt2 = {
-          x: x + HEX_WIDTH / 6 + 1,
-          y: y - HEX_HEIGHT / 12 + 1,
-        };
+      case Direction.DownLeft:
+        pt1.x -= HEX_WIDTH / 6;
+        pt1.y += HEX_HEIGHT / 12;
+        pt2.x += HEX_WIDTH / 6;
+        pt2.y -= HEX_HEIGHT / 12;
+        break;
       case Direction.UpLeft:
-        pt1 = {
-          x: x - HEX_WIDTH / 6 + 1,
-          y: y - HEX_HEIGHT / 12 + 1,
-        };
-        pt2 = {
-          x: x + HEX_WIDTH / 6 + 1,
-          y: y + HEX_HEIGHT / 12 + 1,
-        };
+      case Direction.DownRight:
+        pt1.x -= HEX_WIDTH / 6;
+        pt1.y -= HEX_HEIGHT / 12;
+        pt2.x += HEX_WIDTH / 6;
+        pt2.y += HEX_HEIGHT / 12;
+        break;
+      default:
+        break;
     }
     return [pt1, pt2];
   };

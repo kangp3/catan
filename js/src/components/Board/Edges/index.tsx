@@ -1,6 +1,8 @@
 import * as React from "react";
 
-import Edge, { Direction } from "./Edge";
+import { HEX_WIDTH, HEX_HEIGHT, Direction } from "components/Board/dims";
+
+import Edge from "./Edge";
 
 interface Props {
   size: number;

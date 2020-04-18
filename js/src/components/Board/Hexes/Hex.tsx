@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-import {HEX_WIDTH, HEX_HEIGHT} from 'components/Board/dims.js';
+import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
 
-import * as styles from './styles.scss';
+import * as styles from "./styles.scss";
 
 interface Props {
   x: number;
@@ -20,17 +20,17 @@ class Hex extends React.Component<Props> {
       `${xStep},${yStep}`,
       `0,${2 * yStep}`,
       `${-xStep},${yStep}`,
-    ].join(' ');
+    ].join(" ");
   };
 
   getTransform = (): string => {
-    const {x, y} = this.props;
+    const { x, y } = this.props;
     return `translate(${x + 1},${y + 1})`;
   };
 
   onClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log('hi');
+    console.log("hi");
   };
 
   render() {
