@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Board from "components/Board";
-import { fetchBody } from "utils/fetch";
+import { fetchBody, urlWithParams } from "utils/fetch";
 
 interface Props {
   className: string;
@@ -28,7 +28,8 @@ class Game extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    fetchBody<GameInfo>(`${process.env.API_URL}/catan/game`).then(
+    const url = urlWithParams(`${process.env.API_URL}/catan/game`);
+    fetchBody<GameInfo>(url).then(
       data => {
         this.setState({
           loading: false,
