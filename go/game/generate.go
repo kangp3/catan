@@ -31,9 +31,7 @@ func shuffleResources(size int) []types.ResourceType {
 	return resources
 }
 
-func Generate(size int) []*types.Hex {
-	resources := shuffleResources(size)
-
+func generateHexes(size int, resources []types.ResourceType) []*types.Hex {
 	radius := size - 1
 	hexes := []*types.Hex{}
 	for x := -radius; x < size; x++ {
@@ -46,4 +44,9 @@ func Generate(size int) []*types.Hex {
 		}
 	}
 	return hexes
+}
+
+func Generate(size int) []*types.Hex {
+	resources := shuffleResources(size)
+	hexes := generateHexes(size, resources)
 }
