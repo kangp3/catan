@@ -1,4 +1,4 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   module: {
@@ -8,14 +8,14 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'ts-loader',
+            loader: "ts-loader",
           },
         ],
       },
       {
         test: /\.html$/,
         use: {
-          loader: 'html-loader',
+          loader: "html-loader",
         },
       },
       {
@@ -29,11 +29,11 @@ module.exports = {
           // https://stackoverflow.com/a/43953484
           {
             // Translates CSS into <style> tags in the DOM
-            loader: 'style-loader',
+            loader: "style-loader",
           },
           {
             // Translates CSS files into importable Javascript modules
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               // This is required for
               //   import styles from './styles.scss'
@@ -43,7 +43,7 @@ module.exports = {
           },
           {
             // Translates SCSS files into CSS
-            loader: 'sass-loader',
+            loader: "sass-loader",
           },
         ],
       },
@@ -53,7 +53,7 @@ module.exports = {
     new HtmlWebPackPlugin({
       // This points webpack at the correct index.html file that bootstraps the
       // entire application
-      template: 'src/index.html',
+      template: "src/index.html",
     }),
   ],
   resolve: {
@@ -61,10 +61,10 @@ module.exports = {
     // imports. This enables the use of
     //   import 'containers/App'
     // syntax as opposed to relative path syntax
-    modules: ['src', 'node_modules'],
-    extensions: ['.ts', '.tsx', '.js'],
+    modules: ["src", "node_modules"],
+    extensions: [".ts", ".tsx", ".js"],
   },
   // Generate source maps for Chrome debugger to map generated JS back to original
   // TypeScript code
-  devtool: 'source-map',
+  devtool: "source-map",
 };
