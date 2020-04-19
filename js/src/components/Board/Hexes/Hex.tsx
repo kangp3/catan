@@ -15,12 +15,12 @@ export enum ResourceType {
   Wood = "wood",
 }
 
-interface Props {
-  coord: AxialCoord;
-  type: ResourceType;
+export interface HexProps {
+  coords: AxialCoord;
+  resource: ResourceType;
 }
 
-class Hex extends React.Component<Props> {
+class Hex extends React.Component<HexProps> {
   getPoints = (): string => {
     return [
       `${-HEX_XSTEP},${-HEX_YSTEP}`,
@@ -33,9 +33,9 @@ class Hex extends React.Component<Props> {
   };
 
   getTransform = (): string => {
-    const { coord } = this.props;
-    const xPos = (-2 * coord.x - coord.y) * HEX_XSTEP;
-    const yPos = -3 * coord.y * HEX_YSTEP;
+    const { coords } = this.props;
+    const xPos = (-2 * coords.x - coords.y) * HEX_XSTEP;
+    const yPos = -3 * coords.y * HEX_YSTEP;
     return `translate(${xPos + 1},${yPos + 1})`;
   };
 
@@ -48,7 +48,7 @@ class Hex extends React.Component<Props> {
     return (
       <polygon
         className={classNames(styles.hex, {
-          [styles[this.props.type]]: true,
+          [styles[this.props.resource]]: true,
         })}
         points={this.getPoints()}
         transform={this.getTransform()}
