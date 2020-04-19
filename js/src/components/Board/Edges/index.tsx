@@ -11,7 +11,7 @@ interface Props {
 class Edges extends React.Component<Props> {
   render() {
     const edges = this.props.edges.map((edge, key) => (
-      <Edge p1Coord={edge[0]} p2Coord={edge[1]} />
+      <Edge key={key} p1Coord={edge[0]} p2Coord={edge[1]} />
     ));
     return <g>{edges}</g>;
   }
