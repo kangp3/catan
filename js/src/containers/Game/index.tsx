@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import Board from "components/Board";
+import { fetchBody } from "utils/fetch";
 
 interface Props {
   className: string;
@@ -9,7 +10,7 @@ interface Props {
 interface State {
   loading: boolean;
   error: string;
-  gameInfo: GameInfo | null;
+  gameInfo?: GameInfo;
 }
 
 interface GameInfo {
@@ -23,40 +24,32 @@ class Game extends React.Component<Props, State> {
     this.state = {
       loading: true,
       error: "",
-      gameInfo: null,
     };
   }
 
   componentDidMount() {
-    fetch(`${process.env.API_URL}/catan/game`)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        return res.json();
-      })
-      .then(data => {
+    fetchBody<GameInfo>(`${process.env.API_URL}/catan/game`).then(
+      data => {
         this.setState({
           loading: false,
           gameInfo: data,
         });
-      })
-      .catch(err => {
+      },
+      err => {
         this.setState({
           loading: false,
           error: err,
         });
-      });
+      }
+    );
   }
 
   render() {
     const { gameInfo } = this.state;
     return (
-      !!gameInfo && (
-        <div className={this.props.className}>
-          <Board size={gameInfo.size} />
-        </div>
-      )
+      <div className={this.props.className}>
+        {!!gameInfo && <Board size={gameInfo.size} />}
+      </div>
     );
   }
 }
