@@ -18,6 +18,7 @@ export enum ResourceType {
 export interface HexProps {
   coords: AxialCoord;
   resource: ResourceType;
+  roll?: number;
 }
 
 class Hex extends React.Component<HexProps> {
@@ -32,11 +33,16 @@ class Hex extends React.Component<HexProps> {
     ].join(" ");
   };
 
-  getTransform = (): string => {
+  getCenter = (): [number, number] => {
     const { coords } = this.props;
-    const xPos = (-2 * coords.x - coords.y) * HEX_XSTEP;
-    const yPos = -3 * coords.y * HEX_YSTEP;
-    return `translate(${xPos + 1},${yPos + 1})`;
+    const x = (-2 * coords.x - coords.y) * HEX_XSTEP;
+    const y = -3 * coords.y * HEX_YSTEP;
+    return [x + 1, y + 1];
+  };
+
+  getTransform = (): string => {
+    const [xPos, yPos] = this.getCenter();
+    return `translate(${xPos},${yPos})`;
   };
 
   onClick = (e: React.MouseEvent) => {
@@ -45,15 +51,21 @@ class Hex extends React.Component<HexProps> {
   };
 
   render() {
+    const [x, y] = this.getCenter();
     return (
-      <polygon
-        className={classNames(styles.hex, {
-          [styles[this.props.resource]]: true,
-        })}
-        points={this.getPoints()}
-        transform={this.getTransform()}
-        onClick={this.onClick}
-      />
+      <g>
+        <polygon
+          className={classNames(styles.hex, {
+            [styles[this.props.resource]]: true,
+          })}
+          points={this.getPoints()}
+          transform={this.getTransform()}
+          onClick={this.onClick}
+        />
+        <text className={styles.rollText} x={x} y={y} text-anchor="middle">
+          {this.props.roll}
+        </text>
+      </g>
     );
   }
 }

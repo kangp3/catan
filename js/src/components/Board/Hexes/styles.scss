@@ -8,6 +8,12 @@
   stroke-width: 2;
 }
 
+.rollText {
+  font-family: sans-serif;
+  pointer-events: none;
+  user-select: none;
+}
+
 .brick {
   fill: #e08b8b;
 }
