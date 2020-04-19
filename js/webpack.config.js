@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -55,6 +56,7 @@ module.exports = {
       // entire application
       template: "src/index.html",
     }),
+    new webpack.EnvironmentPlugin(["API_URL"]),
   ],
   resolve: {
     // This is essentially the "path" that webpack searches to resolve

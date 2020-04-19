@@ -30,7 +30,7 @@ class Hex extends React.Component<Props> {
 
   onClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log("hi");
+    console.log(process.env.API_URL);
   };
 
   render() {
