@@ -1,12 +1,23 @@
 import * as React from "react";
+import * as classNames from "classnames";
 
 import { HEX_XSTEP, HEX_YSTEP } from "components/Board/dims";
 import { AxialCoord } from "types/Coord";
 
 import * as styles from "./styles.scss";
 
+export enum ResourceType {
+  Brick = "brick",
+  Desert = "desert",
+  Grain = "grain",
+  Ore = "ore",
+  Sheep = "sheep",
+  Wood = "wood",
+}
+
 interface Props {
   coord: AxialCoord;
+  type: ResourceType;
 }
 
 class Hex extends React.Component<Props> {
@@ -36,7 +47,9 @@ class Hex extends React.Component<Props> {
   render() {
     return (
       <polygon
-        className={styles.hex}
+        className={classNames(styles.hex, {
+          [styles[this.props.type]]: true,
+        })}
         points={this.getPoints()}
         transform={this.getTransform()}
         onClick={this.onClick}

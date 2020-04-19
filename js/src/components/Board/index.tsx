@@ -6,6 +6,8 @@ import Hexes from "./Hexes";
 import Vertices from "./Vertices";
 import Edges from "./Edges";
 
+import * as styles from "./styles.scss";
+
 interface Props {
   size: number;
 }
@@ -21,7 +23,11 @@ class Board extends React.Component<Props> {
   render() {
     const { size } = this.props;
     return (
-      <svg vectorEffect="non-scaling-stroke" viewBox={this.getViewBox()}>
+      <svg
+        className={styles.board}
+        vectorEffect="non-scaling-stroke"
+        viewBox={this.getViewBox()}
+      >
         <Hexes size={size} />
         <Vertices coords={[{ x: 0, y: 1 }]} />
         <Edges

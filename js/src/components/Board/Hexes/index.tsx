@@ -3,7 +3,7 @@ import * as React from "react";
 import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
 import { AxialCoord } from "types/Coord";
 
-import Hex from "./Hex";
+import Hex, { ResourceType } from "./Hex";
 
 interface Props {
   size: number;
@@ -27,7 +27,7 @@ class Hexes extends React.Component<Props> {
 
   render() {
     const hexes = this.getCoords().map((coord, key) => (
-      <Hex key={key} coord={coord} />
+      <Hex key={key} coord={coord} type={ResourceType.Wood} />
     ));
     return <g>{hexes}</g>;
   }
