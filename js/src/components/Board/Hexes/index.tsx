@@ -6,7 +6,6 @@ import { AxialCoord } from "types/Coord";
 import Hex, { HexProps, ResourceType } from "./Hex";
 
 interface Props {
-  size: number;
   hexes: HexProps[];
 }
 

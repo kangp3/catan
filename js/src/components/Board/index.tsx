@@ -24,14 +24,14 @@ class Board extends React.Component<Props> {
   };
 
   render() {
-    const { size, hexes } = this.props;
+    const { hexes } = this.props;
     return (
       <svg
         className={styles.board}
         vectorEffect="non-scaling-stroke"
         viewBox={this.getViewBox()}
       >
-        <Hexes size={size} hexes={hexes} />
+        <Hexes hexes={hexes} />
         <Vertices coords={[{ x: 0, y: 1 }]} />
         <Edges
           edges={[
