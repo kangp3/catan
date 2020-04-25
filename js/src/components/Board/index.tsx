@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
 
+import Harbors from "./Harbors";
 import Hexes from "./Hexes";
 import { HexProps } from "./Hexes/Hex";
 import Vertices from "./Vertices";
@@ -39,6 +40,7 @@ class Board extends React.Component<Props> {
             [{ x: 0, y: 1 }, { x: 0, y: 2 }],
           ]}
         />
+        <Harbors />
       </svg>
     );
   }

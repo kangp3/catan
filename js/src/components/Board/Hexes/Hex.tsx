@@ -12,6 +12,7 @@ export enum ResourceType {
   Grain = "grain",
   Ore = "ore",
   Sheep = "sheep",
+  Wildcard = "wildcard", // Used by 3:1 harbors
   Wood = "wood",
 }
 
