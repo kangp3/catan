@@ -1,7 +1,6 @@
 package game
 
 import (
-	"log"
 	"math/rand"
 
 	"catan/game/types"
@@ -59,7 +58,6 @@ func generateHexes(size int, resources []types.ResourceType) []*types.Hex {
 				if hex.Resource != types.Desert {
 					hex.Roll, rolls = rolls[0], rolls[1:]
 				}
-				log.Printf("COORDS ARE %+v, %+v", pos, hex.Coords)
 				hexes = append(hexes, hex)
 
 				pos.X += transform.X
@@ -81,6 +79,5 @@ func generateHexes(size int, resources []types.ResourceType) []*types.Hex {
 func Generate(size int) []*types.Hex {
 	resources := shuffleResources(size)
 	hexes := generateHexes(size, resources)
-	log.Printf("HEXES LENGTH %d", len(hexes))
 	return hexes
 }
