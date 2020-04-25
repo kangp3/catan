@@ -63,7 +63,7 @@ class Hex extends React.Component<HexProps> {
           transform={this.getTransform()}
           onClick={this.onClick}
         />
-        <text className={styles.rollText} x={x} y={y} text-anchor="middle">
+        <text className={styles.rollText} x={x} y={y}>
           {this.props.roll}
         </text>
       </g>
