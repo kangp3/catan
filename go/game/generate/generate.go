@@ -1,4 +1,4 @@
-package game
+package generate
 
 import (
 	"math/rand"
@@ -76,7 +76,7 @@ func generateHexes(size int, resources []types.ResourceType) []*types.Hex {
 	return hexes
 }
 
-func Generate(size int) []*types.Hex {
+func NewGame(size int) []*types.Hex {
 	resources := shuffleResources(size)
 	hexes := generateHexes(size, resources)
 	return hexes

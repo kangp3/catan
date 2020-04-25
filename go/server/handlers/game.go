@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"catan/game"
+	"catan/game/generate"
 	"catan/server/requests"
 	"catan/server/responses"
 
@@ -18,6 +18,6 @@ func GetGame(w http.ResponseWriter, r *http.Request) {
 	}
 	render.Render(w, r, &responses.Game{
 		Size:  req.Size,
-		Hexes: game.Generate(req.Size),
+		Hexes: generate.NewGame(req.Size),
 	})
 }
