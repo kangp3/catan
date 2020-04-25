@@ -5,7 +5,7 @@ import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
 import Harbors from "./Harbors";
 import { DockSide } from "./Harbors/Harbor";
 import Hexes from "./Hexes";
-import { HexProps, ResourceType } from "./Hexes/Hex";
+import { Props as HexProps, ResourceType } from "./Hexes/Hex";
 import Vertices from "./Vertices";
 import Edges from "./Edges";
 

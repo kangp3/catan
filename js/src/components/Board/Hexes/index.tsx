@@ -3,7 +3,7 @@ import * as React from "react";
 import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
 import { AxialCoord } from "types/Coord";
 
-import Hex, { HexProps, ResourceType } from "./Hex";
+import Hex, { Props as HexProps, ResourceType } from "./Hex";
 
 interface Props {
   hexes: HexProps[];

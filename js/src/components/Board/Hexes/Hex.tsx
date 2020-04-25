@@ -16,13 +16,13 @@ export enum ResourceType {
   Wood = "wood",
 }
 
-export interface HexProps {
+export interface Props {
   coords: AxialCoord;
   resource: ResourceType;
   roll?: number;
 }
 
-class Hex extends React.Component<HexProps> {
+class Hex extends React.Component<Props> {
   getPoints = (): string => {
     return [
       `${-HEX_XSTEP},${-HEX_YSTEP}`,

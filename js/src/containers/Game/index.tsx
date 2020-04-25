@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Board from "components/Board";
-import { HexProps } from "components/Board/Hexes/Hex";
+import { Props as HexProps } from "components/Board/Hexes/Hex";
 import { fetchBody, urlWithParams } from "utils/fetch";
 
 interface Props {
