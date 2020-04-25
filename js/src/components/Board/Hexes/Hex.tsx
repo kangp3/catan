@@ -3,22 +3,13 @@ import * as classNames from "classnames";
 
 import { HEX_XSTEP, HEX_YSTEP } from "components/Board/dims";
 import { AxialCoord } from "types/Coord";
+import { Resource } from "types/Resource";
 
 import * as styles from "./styles.scss";
 
-export enum ResourceType {
-  Brick = "brick",
-  Desert = "desert",
-  Grain = "grain",
-  Ore = "ore",
-  Sheep = "sheep",
-  Wildcard = "wildcard", // Used by 3:1 harbors
-  Wood = "wood",
-}
-
 export interface Props {
   coords: AxialCoord;
-  resource: ResourceType;
+  resource: Resource;
   roll?: number;
 }
 

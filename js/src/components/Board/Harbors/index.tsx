@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ResourceType } from "components/Board/Hexes/Hex";
+import { Resource } from "types/Resource";
 import { AxialCoord } from "types/Coord";
 
 import Harbor, { DockSide, Props as HarborProps } from "./Harbor";

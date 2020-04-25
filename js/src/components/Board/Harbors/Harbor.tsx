@@ -2,7 +2,7 @@ import * as React from "react";
 import * as classNames from "classnames";
 
 import { HEX_XSTEP, HEX_YSTEP } from "components/Board/dims";
-import { ResourceType } from "components/Board/Hexes/Hex";
+import { Resource } from "types/Resource";
 import { AxialCoord } from "types/Coord";
 
 import * as styles from "./styles.scss";
@@ -18,7 +18,7 @@ export enum DockSide {
 
 export interface Props {
   coords: AxialCoord;
-  resource: ResourceType;
+  resource: Resource;
   dockSide: DockSide;
 }
 

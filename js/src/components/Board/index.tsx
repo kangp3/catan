@@ -1,11 +1,12 @@
 import * as React from "react";
 
 import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
+import { Resource } from "types/Resource";
 
 import Harbors from "./Harbors";
 import { DockSide } from "./Harbors/Harbor";
 import Hexes from "./Hexes";
-import { Props as HexProps, ResourceType } from "./Hexes/Hex";
+import { Props as HexProps } from "./Hexes/Hex";
 import Vertices from "./Vertices";
 import Edges from "./Edges";
 
@@ -45,7 +46,7 @@ class Board extends React.Component<Props> {
           harbors={[
             {
               coords: { x: 0, y: 0 },
-              resource: ResourceType.Wildcard,
+              resource: Resource.Wildcard,
               dockSide: DockSide.UpRight,
             },
           ]}
