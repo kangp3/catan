@@ -1,18 +1,22 @@
 import * as React from "react";
 
 import { ResourceType } from "components/Board/Hexes/Hex";
+import { AxialCoord } from "types/Coord";
 
-import Harbor, { DockSide } from "./Harbor";
+import Harbor, { DockSide, Props as HarborProps } from "./Harbor";
 
-class Harbors extends React.Component {
+interface Props {
+  harbors: HarborProps[];
+}
+
+class Harbors extends React.Component<Props> {
+  getKey = (coords: AxialCoord): string => `(${coords.x},${coords.y})`;
+
   render() {
-    return (
-      <Harbor
-        coords={{ x: 0, y: 0 }}
-        resource={ResourceType.Wildcard}
-        dockSide={DockSide.DownLeft}
-      />
-    );
+    const harbors = this.props.harbors.map(hb => (
+      <Harbor key={this.getKey(hb.coords)} {...hb} />
+    ));
+    return <g>{harbors}</g>;
   }
 }
 

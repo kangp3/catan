@@ -16,7 +16,7 @@ export enum DockSide {
   DownLeft,
 }
 
-interface Props {
+export interface Props {
   coords: AxialCoord;
   resource: ResourceType;
   dockSide: DockSide;
@@ -84,7 +84,7 @@ class Harbor extends React.Component<Props> {
           y="-10"
           width="20"
           height="20"
-          className={classNames(styles.harbor, {
+          className={classNames(styles.label, {
             [styles[this.props.resource]]: true,
           })}
           transform={this.getLabelTransform()}

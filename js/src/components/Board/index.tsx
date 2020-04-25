@@ -3,8 +3,9 @@ import * as React from "react";
 import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
 
 import Harbors from "./Harbors";
+import { DockSide } from "./Harbors/Harbor";
 import Hexes from "./Hexes";
-import { HexProps } from "./Hexes/Hex";
+import { HexProps, ResourceType } from "./Hexes/Hex";
 import Vertices from "./Vertices";
 import Edges from "./Edges";
 
@@ -40,7 +41,15 @@ class Board extends React.Component<Props> {
             [{ x: 0, y: 1 }, { x: 0, y: 2 }],
           ]}
         />
-        <Harbors />
+        <Harbors
+          harbors={[
+            {
+              coords: { x: 0, y: 0 },
+              resource: ResourceType.Wildcard,
+              dockSide: DockSide.UpRight,
+            },
+          ]}
+        />
       </svg>
     );
   }
