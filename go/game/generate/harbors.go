@@ -24,7 +24,7 @@ var harborPos = map[types.Coord]int{
 	types.Coord{X: 1, Y: -3}:  types.DockSideUpLeft,
 	types.Coord{X: 3, Y: -3}:  types.DockSideUpRight,
 	types.Coord{X: 3, Y: -1}:  types.DockSideRight,
-	types.Coord{X: 2, Y: -1}:  types.DockSideRight,
+	types.Coord{X: 2, Y: 1}:   types.DockSideRight,
 }
 
 func shuffleHarbors(size int) []types.ResourceType {

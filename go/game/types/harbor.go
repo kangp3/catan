@@ -1,7 +1,7 @@
 package types
 
 const (
-	DockSideLeft = iota + 1
+	DockSideLeft = iota
 	DockSideUpLeft
 	DockSideUpRight
 	DockSideRight

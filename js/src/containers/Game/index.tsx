@@ -2,6 +2,7 @@ import * as React from "react";
 
 import Board from "components/Board";
 import { Props as HexProps } from "components/Board/Hexes/Hex";
+import { Props as HarborProps } from "components/Board/Harbors/Harbor";
 import { fetchBody, urlWithParams } from "utils/fetch";
 
 interface Props {
@@ -17,6 +18,7 @@ interface State {
 interface GameInfo {
   size: number;
   hexes: HexProps[];
+  harbors: HarborProps[];
 }
 
 class Game extends React.Component<Props, State> {
@@ -51,7 +53,13 @@ class Game extends React.Component<Props, State> {
     const { gameInfo } = this.state;
     return (
       <div className={this.props.className}>
-        {!!gameInfo && <Board size={gameInfo.size} hexes={gameInfo.hexes} />}
+        {!!gameInfo && (
+          <Board
+            size={gameInfo.size}
+            hexes={gameInfo.hexes}
+            harbors={gameInfo.harbors}
+          />
+        )}
       </div>
     );
   }
