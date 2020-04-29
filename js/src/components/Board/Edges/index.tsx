@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import { AxialCoord } from "types/Coord";
 
@@ -27,13 +27,11 @@ const getEdgeKey = (edge: [AxialCoord, AxialCoord]): string => {
   return `(${pt1.x},${pt1.y}),(${pt2.x},${pt2.y})`;
 };
 
-class Edges extends React.Component<Props> {
-  render() {
-    const edges = this.props.edges.map((edge, key) => (
-      <Edge key={getEdgeKey(edge)} p1Coord={edge[0]} p2Coord={edge[1]} />
-    ));
-    return <g>{edges}</g>;
-  }
-}
+const Edges = (props: Props) => {
+  const edges = props.edges.map((edge, key) => (
+    <Edge key={getEdgeKey(edge)} p1Coord={edge[0]} p2Coord={edge[1]} />
+  ));
+  return <g>{edges}</g>;
+};
 
 export default Edges;

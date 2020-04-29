@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import { HEX_WIDTH, HEX_HEIGHT } from "components/Board/dims";
 import { Resource } from "types/Resource";
@@ -10,7 +10,7 @@ import { Props as HexProps } from "./Hexes/Hex";
 import Vertices from "./Vertices";
 import Edges from "./Edges";
 
-import * as styles from "./styles.scss";
+import styles from "./styles.scss";
 
 interface Props {
   size: number;
@@ -18,35 +18,29 @@ interface Props {
   harbors: HarborProps[];
 }
 
-class Board extends React.Component<Props> {
-  getViewBox = () => {
-    const { size } = this.props;
-    const width = 2 * size * HEX_WIDTH;
-    const height = HEX_HEIGHT + ((3 * HEX_HEIGHT) / 4) * 2 * size;
-    return `${-width / 2} ${-height / 2} ${width + 2} ${height + 2}`;
-  };
+const getViewBox = (size: number) => {
+  const width = 2 * size * HEX_WIDTH;
+  const height = HEX_HEIGHT + ((3 * HEX_HEIGHT) / 4) * 2 * size;
+  return `${-width / 2} ${-height / 2} ${width + 2} ${height + 2}`;
+};
 
-  render() {
-    const { hexes, harbors } = this.props;
-    return (
-      <svg
-        className={styles.board}
-        vectorEffect="non-scaling-stroke"
-        viewBox={this.getViewBox()}
-      >
-        <Harbors harbors={harbors} />
-        <Hexes hexes={hexes} />
-        <Vertices coords={[{ x: 0, y: 1 }]} />
-        <Edges
-          edges={[
-            [{ x: 0, y: 1 }, { x: -1, y: 1 }],
-            [{ x: 0, y: 1 }, { x: 1, y: 0 }],
-            [{ x: 0, y: 1 }, { x: 0, y: 2 }],
-          ]}
-        />
-      </svg>
-    );
-  }
-}
+const Board = (props: Props) => (
+  <svg
+    className={styles.board}
+    vectorEffect="non-scaling-stroke"
+    viewBox={getViewBox(props.size)}
+  >
+    <Harbors harbors={props.harbors} />
+    <Hexes hexes={props.hexes} />
+    <Vertices coords={[{ x: 0, y: 1 }]} />
+    <Edges
+      edges={[
+        [{ x: 0, y: 1 }, { x: -1, y: 1 }],
+        [{ x: 0, y: 1 }, { x: 1, y: 0 }],
+        [{ x: 0, y: 1 }, { x: 0, y: 2 }],
+      ]}
+    />
+  </svg>
+);
 
 export default Board;

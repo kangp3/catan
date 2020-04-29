@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 
 import Board from "components/Board";
 import { Props as HexProps } from "components/Board/Hexes/Hex";
@@ -21,48 +21,36 @@ interface GameInfo {
   harbors: HarborProps[];
 }
 
-class Game extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
+const Game = (props: Props) => {
+  const [gameInfo, setGameInfo] = useState<GameInfo | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
-    this.state = {
-      loading: true,
-      error: "",
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     const url = urlWithParams(`${process.env.API_URL}/catan/game`);
     fetchBody<GameInfo>(url).then(
       data => {
-        this.setState({
-          loading: false,
-          gameInfo: data,
-        });
+        setLoading(false);
+        setGameInfo(data);
       },
       err => {
-        this.setState({
-          loading: false,
-          error: err,
-        });
+        setLoading(false);
+        setError(err);
       }
     );
-  }
+  }, []);
 
-  render() {
-    const { gameInfo } = this.state;
-    return (
-      <div className={this.props.className}>
-        {!!gameInfo && (
-          <Board
-            size={gameInfo.size}
-            hexes={gameInfo.hexes}
-            harbors={gameInfo.harbors}
-          />
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={props.className}>
+      {!!gameInfo && (
+        <Board
+          size={gameInfo.size}
+          hexes={gameInfo.hexes}
+          harbors={gameInfo.harbors}
+        />
+      )}
+    </div>
+  );
+};
 
 export default Game;

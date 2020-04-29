@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 import { AxialCoord } from "types/Coord";
 
@@ -8,16 +8,13 @@ interface Props {
   coords: AxialCoord[];
 }
 
-class Vertices extends React.Component<Props> {
-  render() {
-    const { coords } = this.props;
+const getKey = (coords: AxialCoord): string => `(${coords.x},${coords.y})`;
 
-    const vertices = coords.map((coord, key) => (
-      <Vertex key={key} coord={coord} />
-    ));
-
-    return <g>{vertices}</g>;
-  }
-}
+const Vertices = (props: Props) => {
+  const vertices = props.coords.map((coord: AxialCoord) => (
+    <Vertex key={getKey(coord)} coord={coord} />
+  ));
+  return <g>{vertices}</g>;
+};
 
 export default Vertices;
