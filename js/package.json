@@ -17,6 +17,7 @@
     "@types/classnames": "^2.2.10",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
+    "@types/uuid": "^7.0.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
@@ -39,6 +40,7 @@
     "classnames": "^2.2.6",
     "express": "^4.17.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "uuid": "^8.0.0"
   }
 }

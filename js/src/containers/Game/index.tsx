@@ -4,6 +4,7 @@ import Board from "components/Board";
 import { Props as HexProps } from "components/Board/Hexes/Hex";
 import { Props as HarborProps } from "components/Board/Harbors/Harbor";
 import { fetchBody, urlWithParams } from "utils/fetch";
+import { useMessageHandler, useWebsocket } from "utils/websocket";
 
 interface Props {
   className: string;
@@ -39,6 +40,11 @@ const Game = (props: Props) => {
       }
     );
   }, []);
+
+  const sock = useWebsocket(`ws://localhost:9000/catan/ws`);
+  useMessageHandler(sock, (e: MessageEvent) => {
+    console.log("GAME", e);
+  });
 
   return (
     <div className={props.className}>
