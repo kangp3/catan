@@ -59,14 +59,20 @@ module.exports = {
     new webpack.EnvironmentPlugin(["API_URL"]),
   ],
   resolve: {
-    // This is essentially the "path" that webpack searches to resolve
-    // imports. This enables the use of
+    // This is essentially the "path" that webpack searches to resolve imports.
+    // This enables the use of
     //   import 'containers/App'
     // syntax as opposed to relative path syntax
     modules: ["src", "node_modules"],
     extensions: [".ts", ".tsx", ".js"],
   },
-  // Generate source maps for Chrome debugger to map generated JS back to original
-  // TypeScript code
+  // Generate source maps for Chrome debugger to map generated JS back to
+  // original TypeScript code
   devtool: "source-map",
+  devServer: {
+    // Redirect all 404 requests to index.html
+    // Required to leverage react-router-dom routing since no concrete resource
+    // is being served outside of /
+    historyApiFallback: true,
+  },
 };
