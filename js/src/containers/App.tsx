@@ -1,17 +1,18 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
+import Home from "containers/Home";
 import Play from "containers/Play";
 
 const App = () => (
-  <React.Fragment>
+  <Switch>
     <Route path="/play">
       <Play />
     </Route>
     <Route path="/">
-      <Play />
+      <Home />
     </Route>
-  </React.Fragment>
+  </Switch>
 );
 
 export default App;
