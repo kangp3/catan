@@ -4,6 +4,7 @@ set -e
 HERE="$(dirname "${BASH_SOURCE[0]}")"
 
 godir="$HERE/../go"
+$HOME/go/bin/catan || true
 while true; do
     file=$(fswatch -1 "$godir" -e ".*" -i "\\.go$";)
     echo 'Detected go file changes'
