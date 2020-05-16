@@ -66,6 +66,13 @@ module.exports = {
     modules: ["src", "node_modules"],
     extensions: [".ts", ".tsx", ".js"],
   },
+  output: {
+    // Load all assets relative to the root path rather than the request's
+    // path. Without this, the browser tries to retrieve main.js from a path
+    // relative to the current page and raises a 404. For example, a request to
+    // /play/asdf would raise a 404 on resource /play/main.js
+    publicPath: "/",
+  },
   // Generate source maps for Chrome debugger to map generated JS back to
   // original TypeScript code
   devtool: "source-map",
