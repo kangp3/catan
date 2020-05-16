@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import Board from "components/Board";
 import { Props as HexProps } from "components/Board/Hexes/Hex";
@@ -23,12 +24,14 @@ interface GameInfo {
 }
 
 const Game = (props: Props) => {
+  const { gameName } = useParams();
+
   const [gameInfo, setGameInfo] = useState<GameInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    const url = urlWithParams(`${process.env.API_URL}/catan/game/asdf`);
+    const url = urlWithParams(`${process.env.API_URL}/catan/game/${gameName}`);
     fetchBody<GameInfo>(url).then(
       data => {
         setLoading(false);

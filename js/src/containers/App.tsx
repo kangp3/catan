@@ -7,7 +7,7 @@ import NotFound from "containers/NotFound";
 
 const App = () => (
   <Switch>
-    <Route path="/play">
+    <Route path="/play/:gameName">
       <Play />
     </Route>
     <Route exact path="/">
