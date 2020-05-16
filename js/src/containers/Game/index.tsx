@@ -44,11 +44,6 @@ const Game = (props: Props) => {
     );
   }, []);
 
-  const sock = useWebsocket(`ws://localhost:9000/catan/ws`);
-  useMessageHandler(sock, (e: MessageEvent) => {
-    console.log("GAME", e);
-  });
-
   return (
     <div className={props.className}>
       {!!gameInfo && (

@@ -31,8 +31,10 @@ func getRouter() http.Handler {
 	})
 	r.Route("/catan", func(r chi.Router) {
 		r.Route("/game", func(r chi.Router) {
-			r.Get("/{gameID}", handlers.GetGame)
-			r.Get("/ws", func(w http.ResponseWriter, r *http.Request) { m.HandleRequest(w, r) })
+			r.Route("/{gameID}", func(r chi.Router) {
+				r.Get("/", handlers.GetGame)
+				r.Get("/ws", func(w http.ResponseWriter, r *http.Request) { m.HandleRequest(w, r) })
+			})
 		})
 	})
 	return r
