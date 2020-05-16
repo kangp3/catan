@@ -3,17 +3,23 @@ set -e
 
 HERE="$(dirname "${BASH_SOURCE[0]}")"
 
-godir="$HERE/../go"
-$HOME/go/bin/catan || true
-while true; do
-    file=$(fswatch -1 "$godir" -e ".*" -i "\\.go$";)
-    echo 'Detected go file changes'
-
+clean_up_bg () {
     # Clean up existing processes
     running_wait_pids="$(jobs -rp)"
     if [[ $running_wait_pids ]]; then
-        kill $running_wait_pids;
+        kill $running_wait_pids
     fi
+}
+
+trap clean_up_bg EXIT
+
+godir="$HERE/../go"
+$HOME/go/bin/catan &
+while true; do
+    file=$(fswatch -l0.3 -1 "$godir" -e ".*" -i "\\.go$";)
+    echo 'Detected go file changes'
+
+    clean_up_bg
 
     # Catch build errors locally and print, otherwise restart server
     errors=$(

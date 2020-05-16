@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
 
+	"catan/db"
 	"catan/server/handlers"
 	"catan/server/middleware"
 
@@ -16,6 +18,7 @@ import (
 func getRouter() http.Handler {
 	m := melody.New()
 	m.HandleMessage(func(s *melody.Session, msg []byte) {
+		log.Printf("WS Headers: %+v", s.Request.Header)
 		m.Broadcast(msg)
 	})
 
@@ -27,8 +30,10 @@ func getRouter() http.Handler {
 		w.Write([]byte("OK"))
 	})
 	r.Route("/catan", func(r chi.Router) {
-		r.Get("/game", handlers.GetGame)
-		r.Get("/ws", func(w http.ResponseWriter, r *http.Request) { m.HandleRequest(w, r) })
+		r.Route("/game", func(r chi.Router) {
+			r.Get("/{gameID}", handlers.GetGame)
+			r.Get("/ws", func(w http.ResponseWriter, r *http.Request) { m.HandleRequest(w, r) })
+		})
 	})
 	return r
 }
@@ -41,4 +46,8 @@ func main() {
 	}
 	log.Printf("Listening on port %d", port)
 	log.Fatal(s.ListenAndServe())
+}
+
+func init() {
+	db.InitPool(context.Background())
 }

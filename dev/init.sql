@@ -1,0 +1,3 @@
+CREATE DATABASE catan;
+CREATE USER catanathan;
+GRANT ALL PRIVILEGES ON DATABASE catan TO catanathan;

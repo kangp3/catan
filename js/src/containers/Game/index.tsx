@@ -28,7 +28,7 @@ const Game = (props: Props) => {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    const url = urlWithParams(`${process.env.API_URL}/catan/game`);
+    const url = urlWithParams(`${process.env.API_URL}/catan/game/asdf`);
     fetchBody<GameInfo>(url).then(
       data => {
         setLoading(false);
