@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import Form from "components/Form";
 import TextInput from "components/Input/TextInput";
@@ -7,6 +8,7 @@ import Button from "components/Input/Button";
 import styles from "./styles.scss";
 
 const Home = () => {
+  const history = useHistory();
   const [gameId, setGameId] = useState("");
   return (
     <div className={styles.container}>
@@ -14,7 +16,8 @@ const Home = () => {
       <Form
         className={styles.form}
         onSubmit={e => {
-          console.log("submit");
+          // TODO(peter): Handle invalid cases (e.g. empty, non-alphanum)
+          history.push(`/play/${gameId}`);
         }}
       >
         <TextInput
