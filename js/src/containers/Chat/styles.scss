@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatLogWrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-grow: 1;
+
+  overflow: auto;
+}
+
+.chatLog {
+  color: white;
+  font-family: sans-serif;
+}
+
+.chatBox {
+  min-height: 3rem;
+}
