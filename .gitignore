@@ -1,5 +1,5 @@
 js/node_modules
 js/dist
-db/
+/db/
 *.swp
 *.swo
