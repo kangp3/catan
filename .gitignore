@@ -1,5 +1,5 @@
 js/node_modules
 js/dist
-/db/
-*.swp
-*.swo
+.pgdata/*
+!.pgdata/postgresql.conf
+*.sw[l-p]
